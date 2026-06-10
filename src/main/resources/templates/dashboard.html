@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Dashboard</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f4f7fa;
+        }
+
+        .dashboard-container {
+            text-align: center;
+            padding: 50px;
+        }
+
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        p {
+            color: #666;
+            margin-bottom: 40px;
+        }
+
+        .card-container {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            margin-bottom: 40px;
+        }
+
+        .card {
+            background: white;
+            width: 280px;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .card h2 {
+            color: #3498db;
+            margin-bottom: 15px;
+        }
+
+        .card p {
+            color: #666;
+            margin: 20px 0;
+        }
+
+        button {
+            background: #3498db;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        button:hover {
+            background: #2980b9;
+        }
+
+        .back-btn {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 12px 22px;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .back-btn:hover {
+            background: #c0392b;
+        }
+    </style>
+
+</head>
+
+<body>
+
+<div class="dashboard-container">
+
+    <h1>Welcome to Dashboard</h1>
+
+    <p>Select options from below menu.</p>
+
+    <div class="card-container">
+
+        <div class="card">
+            <h2>Role</h2>
+            <p>Manage user roles here</p>
+
+            <a href="/role">
+                <button type="button">View Role</button>
+            </a>
+        </div>
+
+        <div class="card">
+            <h2>Department</h2>
+            <p>Manage departments here</p>
+
+            <a href="/department">
+                <button type="button">View Department</button>
+            </a>
+        </div>
+
+        <div class="card">
+            <h2>User</h2>
+            <p>Manage users here</p>
+
+            <a th:href="@{/userform}">
+                <button type="button">View User</button>
+            </a>
+        </div>
+
+    </div>
+
+    <div>
+        <a href="/login" class="back-btn">Back</a>
+    </div>
+
+</div>
+
+</body>
+
+</html>

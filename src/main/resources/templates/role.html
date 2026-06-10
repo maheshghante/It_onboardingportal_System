@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Role Form</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #74ebd5, #9face6);
+        }
+
+        .sidebar {
+            width: 220px;
+            height: 100vh;
+            background: #2c3e50;
+            color: white;
+            position: fixed;
+            padding-top: 20px;
+        }
+
+        .sidebar h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .sidebar ul li {
+            padding: 12px;
+            text-align: center;
+        }
+
+        .sidebar ul li a {
+            color: white;
+            text-decoration: none;
+            display: block;
+        }
+
+        .sidebar ul li:hover {
+            background: #34495e;
+        }
+
+        .main-content {
+            margin-left: 240px;
+            padding: 40px;
+        }
+
+        .form-box {
+            background: white;
+            padding: 30px;
+            width: 400px;
+            margin: auto;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .form-box h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 10px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            border-radius: 6px;
+            border: 1px solid #ccc;
+        }
+
+        textarea {
+            resize: none;
+            height: 80px;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 10px;
+        }
+
+        button, .back-btn {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            border-radius: 6px;
+            color: white;
+            cursor: pointer;
+            font-size: 14px;
+            text-align: center;
+            text-decoration: none;
+        }
+		.btn-group {
+		    display: grid;
+		    grid-template-columns: 1fr 1fr;
+		    gap: 10px;
+		}
+
+		button, .back-btn, .view-btn {
+		    padding: 10px;
+		    border: none;
+		    border-radius: 6px;
+		    color: white;
+		    cursor: pointer;
+		    font-size: 14px;
+		    text-align: center;
+		    text-decoration: none;
+		}
+
+		/* Button Colors */
+		.submit-btn {
+		    background: #28a745;
+		}
+
+		.cancel-btn {
+		    background: #dc3545;
+		}
+
+		.back-btn {
+		    background: #007bff;
+		}
+
+		.view-btn {
+		    background: #6f42c1; /* purple */
+		}
+
+		button:hover, .back-btn:hover, .view-btn:hover {
+		    opacity: 0.85;
+		}
+    </style>
+</head>
+
+<body>
+
+<div class="sidebar">
+    <h2>Dashboard</h2>
+    <ul>
+        <li><a href="/role">Role</a></li>
+        <li><a href="/department">Department</a></li>
+        <li><a href="/user">User</a></li>
+    </ul>
+</div>
+
+<div class="main-content">
+
+    <div class="form-box">
+        <h1>Role Form</h1>
+
+        <!-- ❗ duplicate </form> काढलं -->
+		<form th:action="@{/saveRole}" th:object="${role}" method="post">
+
+			
+			<input type="hidden" th:field="*{roleId}">
+
+            <label>Role Name<span style="color:red;">*</span></label>
+			<input type="text"
+			        th:field="*{roleName}"
+			        placeholder="Enter Role Name">
+            <label>Description</label>
+			<textarea th:field="*{roleDescription}"
+			             placeholder="Enter Description"></textarea>
+			
+			<div class="btn-group">
+			    <button type="submit" class="submit-btn">Submit</button>
+			    <button type="reset" class="cancel-btn">Cancel</button>
+
+			    <!-- Back to Dashboard -->
+			    <a th:href="@{/dashboard}" class="back-btn">Back</a>
+
+			    <!-- View Roles Page -->
+				<a th:href="@{/roles}" class="view-btn">View Roles</a>
+			</div>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+</html>

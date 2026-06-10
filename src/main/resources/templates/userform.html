@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+
+    <meta charset="UTF-8">
+    <title>Create User</title>
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+        }
+
+        body{
+            font-family:Arial, sans-serif;
+            background:#f4f6f9;
+        }
+
+        .container{
+            width:450px;
+            margin:50px auto;
+            background:white;
+            padding:30px;
+            border-radius:10px;
+            box-shadow:0px 0px 10px rgba(0,0,0,0.2);
+        }
+
+        h2{
+            text-align:center;
+            margin-bottom:25px;
+            color:#333;
+        }
+
+        label{
+            display:block;
+            margin-bottom:8px;
+            margin-top:15px;
+            font-weight:bold;
+            color:#444;
+        }
+
+        input,
+        select{
+            width:100%;
+            padding:12px;
+            border:1px solid #ccc;
+            border-radius:6px;
+            font-size:15px;
+            outline:none;
+            transition:0.3s;
+        }
+
+        input:focus,
+        select:focus{
+            border-color:rgb(255, 0, 128);
+            box-shadow:0px 0px 5px rgba(255, 0, 128, 0.3);
+        }
+
+        button{
+            width:100%;
+            padding:12px;
+            margin-top:25px;
+            background:rgb(255, 0, 128);
+            color:white;
+            border:none;
+            border-radius:6px;
+            font-size:16px;
+            font-weight:bold;
+            cursor:pointer;
+            transition:0.3s;
+        }
+
+        button:hover{
+            background:darkblue;
+        }
+
+        .btn-group{
+            margin-top:20px;
+            text-align:center;
+        }
+
+        .btn{
+            display:inline-block;
+            padding:10px 20px;
+            text-decoration:none;
+            color:white;
+            border-radius:5px;
+            margin:5px;
+            font-weight:bold;
+        }
+
+        .back-btn{
+            background:gray;
+        }
+
+        .back-btn:hover{
+            background:black;
+        }
+
+        .list-btn{
+            background:green;
+        }
+
+        .list-btn:hover{
+            background:darkgreen;
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="container">
+
+    <h2>Create User</h2>
+	
+	<p th:if="${error}"
+	   th:text="${error}"
+	   style="color:red; text-align:center; font-weight:bold;">
+	</p>
+
+    <form th:action="@{/saveUser}" 
+          th:object="${user}" 
+          method="post">
+
+		  <input type="hidden" th:field="*{urId}">
+		  
+        <!-- First Name -->
+        <label>
+            First Name
+            <span style="color:red;">*</span>
+        </label>
+
+        <input type="text"
+               th:field="*{urFirstName}"
+               placeholder="Enter First Name"
+               required>
+
+        <!-- Last Name -->
+        <label>
+            Last Name
+            <span style="color:red;">*</span>
+        </label>
+
+        <input type="text"
+               th:field="*{urLastName}"
+               placeholder="Enter Last Name"
+               required>
+
+        <!-- Email -->
+        <label>
+            Email
+            <span style="color:red;">*</span>
+        </label>
+
+        <input type="email"
+               th:field="*{urEmail}"
+               placeholder="Enter Email"
+               required>
+
+        <!-- Password -->
+        <label>
+            Password
+            <span style="color:red;">*</span>
+        </label>
+
+        <input type="password"
+               th:field="*{urPassword}"
+               placeholder="Enter Password"
+               pattern="^(?=.*[A-Za-z])(?=.*[0-9])(?=.*[@$!%*#?&]).{8,}$"
+               title="Password must contain minimum 8 characters, 1 number and 1 symbol"
+               required>
+
+        <!-- Phone -->
+        <label>
+            Phone Number
+            <span style="color:red;">*</span>
+        </label>
+
+        <input type="text"
+               th:field="*{urPhoneNumber}"
+               placeholder="Enter 10 Digit Phone Number"
+               pattern="[0-9]{10}"
+               title="Enter valid 10 digit phone number"
+               required>
+
+     
+
+			   <label>
+			       Role
+			       <span style="color:red;">*</span>
+			   </label>
+
+			   <select th:field="*{role}" required>
+
+			       <option value="">Select Role</option>
+			       <option value="HR">HR</option>
+			       <option value="Manager">Manager</option>
+			       <option value="Admin">Admin</option>
+			       <option value="Employee">Employee</option>
+
+			   </select>
+			   
+			   
+			   
+			   <label>
+			       Department
+			       <span style="color:red;">*</span>
+			   </label>
+
+			   <select th:field="*{urDepartment}" required>
+
+			       <option value="">Select Department</option>
+			       <option value="HR">HR</option>
+			       <option value="IT">IT</option>
+			       <option value="Finance">Finance</option>
+			       <option value="Sales">Sales</option>
+			       <option value="Marketing">Marketing</option>
+
+			   </select>
+
+        <!-- Submit -->
+        <button type="submit">
+            Save User
+        </button>
+
+    </form>
+
+    <!-- Buttons -->
+    <div class="btn-group">
+
+        <a th:href="@{/dashboard}" class="btn back-btn">
+            Back
+        </a>
+
+		<a th:href="@{/users}" class="btn list-btn">
+		    View User List
+		</a>
+
+    </div>
+
+</div>
+
+</body>
+</html>

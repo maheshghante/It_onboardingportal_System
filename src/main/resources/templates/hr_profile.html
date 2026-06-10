@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>HR Profile</title>
+
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+
+        *{
+            margin:0;
+            padding:0;
+            box-sizing:border-box;
+            font-family:'Segoe UI',sans-serif;
+        }
+
+        body{
+            background:linear-gradient(to right,#e0ecff,#f4f7fb);
+            min-height:100vh;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            padding:30px;
+        }
+
+        .profile-container{
+            width:430px;
+            background:white;
+            border-radius:25px;
+            padding:35px;
+            box-shadow:0 8px 25px rgba(0,0,0,0.12);
+            text-align:center;
+            transition:0.3s;
+        }
+
+        .profile-container:hover{
+            transform:translateY(-5px);
+        }
+
+        .profile-title{
+            font-size:32px;
+            color:#1d4ed8;
+            margin-bottom:25px;
+            font-weight:bold;
+        }
+
+        .profile-image{
+            width:150px;
+            height:150px;
+            border-radius:50%;
+            object-fit:cover;
+            border:5px solid #2563eb;
+            margin-bottom:20px;
+        }
+
+        .default-image{
+            width:150px;
+            height:150px;
+            border-radius:50%;
+            background:#dbeafe;
+            display:flex;
+            justify-content:center;
+            align-items:center;
+            margin:0 auto 20px;
+            font-size:60px;
+            color:#2563eb;
+            border:5px solid #2563eb;
+        }
+
+        .info{
+            text-align:left;
+            margin-top:20px;
+        }
+
+        .info p{
+            background:#f8fafc;
+            padding:14px;
+            border-radius:12px;
+            margin-bottom:15px;
+            font-size:17px;
+            color:#374151;
+            box-shadow:0 2px 5px rgba(0,0,0,0.05);
+        }
+
+        .info span:first-child{
+            font-weight:bold;
+            color:#1e3a8a;
+        }
+
+        form{
+            margin-top:25px;
+        }
+
+        .btn{
+            padding:12px 22px;
+            border:none;
+            border-radius:12px;
+            font-size:15px;
+            cursor:pointer;
+            text-decoration:none;
+            display:inline-block;
+            margin:6px;
+            transition:0.3s;
+            font-weight:600;
+        }
+
+        .upload-btn{
+            background:#2563eb;
+            color:white;
+        }
+
+        .upload-btn:hover{
+            background:#1d4ed8;
+        }
+
+        .delete-btn{
+            background:#dc2626;
+            color:white;
+        }
+
+        .delete-btn:hover{
+            background:#b91c1c;
+        }
+
+        .back-btn{
+            background:#16a34a;
+            color:white;
+        }
+
+        .back-btn:hover{
+            background:#15803d;
+        }
+
+        @media(max-width:500px){
+
+            .profile-container{
+                width:100%;
+                padding:25px;
+            }
+
+            .profile-title{
+                font-size:26px;
+            }
+        }
+
+    </style>
+
+</head>
+
+<body>
+
+<div class="profile-container">
+
+    <h1 class="profile-title">
+        HR Profile
+    </h1>
+
+    <!-- Profile Image -->
+
+    <div th:if="${user.urProfileImage != null}">
+
+        <img th:src="@{'/profile-images/' + ${user.urProfileImage}}"
+             class="profile-image">
+
+    </div>
+
+    <!-- Default Image -->
+
+    <div th:if="${user.urProfileImage == null}"
+         class="default-image">
+
+        <i class="fa-solid fa-user"></i>
+
+    </div>
+
+    <!-- User Info -->
+
+    <div class="info">
+
+        <p>
+            <span>Name :</span>
+
+            <span th:text="${user.urFirstName + ' ' + user.urLastName}">
+            </span>
+        </p>
+
+        <p>
+            <span>Role :</span>
+
+            <span th:text="${user.role}"></span>
+        </p>
+
+        <p>
+            <span>Email :</span>
+
+            <span th:text="${user.urEmail}"></span>
+        </p>
+
+      
+
+    </div>
+
+    <!-- Upload Photo -->
+
+    <form action="/hr/profile/upload"
+          method="post"
+          enctype="multipart/form-data"
+          id="uploadForm">
+
+        <!-- Hidden File Input -->
+
+        <input type="file"
+               id="profileImage"
+               name="profileImage"
+               accept="image/*"
+               style="display:none"
+               onchange="document.getElementById('uploadForm').submit()">
+
+        <!-- Upload Button -->
+
+        <button type="button"
+                class="btn upload-btn"
+                onclick="document.getElementById('profileImage').click()">
+
+            Upload Photo
+
+        </button>
+
+    </form>
+
+    <!-- Delete Photo -->
+
+    <a href="/hr/profile/delete-photo"
+       class="btn delete-btn">
+
+        Delete Photo
+
+    </a>
+
+    <!-- Back Button -->
+
+	<a th:href="@{/hr_dashboard}"
+	   class="btn back-btn">
+
+	    Back Dashboard
+
+	</a>
+
+</div>
+
+</body>
+
+</html>
